@@ -1,0 +1,121 @@
+/*Style for all*/
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+input, select, button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+
+}
+
+h2 {
+  text-align: center;
+}
+
+/*Navigeringsmeny*/
+nav {
+  background: #772bb5;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+nav a:hover {
+  background: #9500b3;
+}
+
+/*Projektlista*/
+.ProjectInfo {
+  margin-bottom: 1.5rem;
+}
+
+/*Skapa nytt projekt*/
+.CreateProjectForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem 1rem 1rem 1rem;
+}
+
+.CreateProjectBtn {
+  background-color: rgb(4, 70, 4);
+  color: white;
+  cursor: pointer;
+}
+
+/*Skapa nya kunder osv.*/
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem 1rem 1rem 1rem;
+}
+
+.CustomerList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.SkapaKundBtn {
+  background-color: rgb(4, 70, 4);
+  color: white;
+  cursor: pointer;
+}
+
+.SkapaKundBtn:hover {
+  background: rgb(4, 81, 4);
+}
+
+.DeleteBtn {
+  background-color: #af1212;
+  color: white;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+.DeleteBtn:hover {
+  background: darkred;
+}
+
+@media (max-width: 600px) {
+  nav {
+      flex-direction: column;
+      text-align: center;
+  }
+  .container {
+      width: 95%;
+  }
+}
