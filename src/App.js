@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import LandingPage from './components/LandingPage';
 import CreateProject from './components/CreateProject';
 import ProjectList from './components/ProjectList';
 import ProjectEdit from './components/ProjectEdit';
 import ProjectDetails from './components/ProjectDetails';
 import CustomerPage from './components/CustomerPage';
+import NoAccessPage from './components/NoAccessPage';
 import './index.css';
 import './styles.css';
 
 function App() {
     const [projects, setProjects] = useState([]);
     const [customers, setCustomers] = useState([]);
+
+    const location = useLocation();
 
     const fetchProjects = async () => {
         try {
@@ -42,14 +46,18 @@ function App() {
     return (
         <div>
             <h1>Mattin-Lassei Group AB</h1>
+            {location.pathname !== "/" && location.pathname !== "/no-access" && (
             <nav>
-                <Link to="/">Projektlista</Link> | 
+                <Link to="/projects">Projektlista</Link> | 
                 <Link to="/create">Skapa nytt Projekt</Link> | 
                 <Link to="/customers">Skapa och hantera kunder</Link> 
             </nav>
+            )}
 
             <Routes>
-                <Route path="/" element={<ProjectList projects={projects} refreshProjects={fetchProjects} />} />
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/no-access" element={<NoAccessPage />} />
+                <Route path="/projects" element={<ProjectList projects={projects} refreshProjects={fetchProjects} />} />
                 <Route path="/create" element={<CreateProject refreshProjects={fetchProjects} />} />
                 <Route path="/edit/:id" element={<ProjectEdit refreshProjects={fetchProjects} />} />
                 <Route path="/project/:id" element={<ProjectDetails refreshProjects={fetchProjects} />} />

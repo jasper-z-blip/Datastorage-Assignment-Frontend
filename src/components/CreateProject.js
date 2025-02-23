@@ -2,41 +2,41 @@ import React, { useState, useEffect } from "react";
 
 const CreateProject = ({ refreshProjects }) => {
     const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("Auto-generated description");
+    const [description, setDescription] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [statusId, setStatusId] = useState(1);
     const [productId, setProductId] = useState("");
     const [customerId, setCustomerId] = useState("");
-    const [projectNumber, setProjectNumber] = useState(""); // Backend genererar numret
+    const [projectNumber, setProjectNumber] = useState("");
     const [customers, setCustomers] = useState([]);
     const [products, setProducts] = useState([]);
 
-    // 📌 Kostnad per dag baserat på produkt (developer-nivå)
+    // Kostnad per dag baserat på produkt (developer-nivå).
     const productRates = {
         1: 4000, // Junior Developer
         2: 6000, // Midlevel Developer
         3: 9600, // Senior Developer
     };
 
-    // 📌 Funktion för att räkna endast **arbetsdagar** (måndag-fredag)
+    // Räkna endast arbetsdagar (måndag-fredag).
     const computeBusinessDays = (start, end) => {
         let date = new Date(start);
         let endDate = new Date(end);
         let businessDays = 0;
 
         while (date <= endDate) {
-            const dayOfWeek = date.getDay(); // 0 = Söndag, 6 = Lördag
+            const dayOfWeek = date.getDay();
             if (dayOfWeek !== 0 && dayOfWeek !== 6) {
                 businessDays++;
             }
-            date.setDate(date.getDate() + 1); // Gå till nästa dag
+            date.setDate(date.getDate() + 1);
         }
 
         return businessDays;
     };
 
-    // 📌 Beräkna totalpriset baserat på **arbetsdagar** och **produkt**
+    // Beräkna totalpris.
     const totalPrice =
         startDate && endDate && productId
             ? computeBusinessDays(startDate, endDate) * (productRates[Number(productId)] || 0)
@@ -55,6 +55,27 @@ const CreateProject = ({ refreshProjects }) => {
     }, []);
 
     const handleSubmit = async () => {
+        if (!title.trim()) {
+            alert("Projektnamn är obligatorisk!");
+            return;
+        }
+        if (!startDate) {
+            alert("Startdatum är obligatoriskt!");
+            return;
+        }
+        if (!endDate) {
+            alert("Slutdatum är obligatoriskt!");
+            return;
+        }
+        if (!customerId) {
+            alert("Du måste välja en kund!");
+            return;
+        }
+        if (!productId) {
+            alert("Du måste välja en tjänst!");
+            return;
+        }
+
         const projectData = {
             title,
             description,
@@ -76,12 +97,22 @@ const CreateProject = ({ refreshProjects }) => {
 
             if (response.ok) {
                 alert("Projekt skapat!");
+                setTitle("");
+                setDescription("");
+                setStartDate("");
+                setEndDate("");
+                setStatusId(1);
+                setProductId("");
+                setCustomerId("");
                 refreshProjects();
             } else {
-                console.error("❌ Fel vid skapande av projekt:", await response.text());
+                const errorText = await response.text();
+                console.error("❌ Fel vid skapande av projekt:", errorText);
+                alert(`Misslyckades att skapa projekt: ${errorText}`);
             }
         } catch (error) {
             console.error("❌ API-fel:", error);
+            alert("Ett fel uppstod vid anropet till servern.");
         }
     };
 
@@ -94,6 +125,13 @@ const CreateProject = ({ refreshProjects }) => {
                 placeholder="Projektets namn"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+            />
+
+            <input
+                type="text"
+                placeholder="Beskriv projektet"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
             />
 
             <input
@@ -133,7 +171,7 @@ const CreateProject = ({ refreshProjects }) => {
             </select>
 
             <select value={productId} onChange={(e) => setProductId(e.target.value)}>
-                <option value="">Välj Service</option>
+                <option value="">Välj tjänst</option>
                 {products.map((product) => (
                     <option key={product.id} value={product.id}>
                         {product.name}
@@ -151,4 +189,3 @@ const CreateProject = ({ refreshProjects }) => {
 };
 
 export default CreateProject;
-
