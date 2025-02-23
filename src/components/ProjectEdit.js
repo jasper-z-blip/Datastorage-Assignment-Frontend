@@ -80,7 +80,6 @@ const ProjectEdit = () => {
                 <label>User ID:</label>
                 <input type="number" name="userId" value={project.userId} onChange={handleChange} required />
 
-                <button type="submit">Spara ändringar</button>
             </form>
         </div>
     );

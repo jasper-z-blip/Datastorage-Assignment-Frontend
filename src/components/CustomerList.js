@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const CustomerList = () => {
     const [customers, setCustomers] = useState([]);
@@ -38,13 +39,20 @@ const CustomerList = () => {
     }, []);
 
     return (
-        <div>
+        <div className="CustomerListContainer">
             <h2>Kundlista</h2>
             <ul>
                 {customers.map((customer) => (
                     <li className="CustomerList" key={customer.id}>
                         {customer.companyName} ({customer.firstName} {customer.lastName}) - {customer.address} 
-                        <button className="DeleteBtn" onClick={() => deleteCustomer(customer.id)}>🗑️ Radera</button>
+
+                        <Link to={`/edit-customer/${customer.id}`}>
+                            <button className="EditBtn">Redigera</button>
+                        </Link>
+
+                        <button className="DeleteBtn" onClick={() => deleteCustomer(customer.id)}>
+                            🗑️ Radera
+                        </button>
                     </li>
                 ))}
             </ul>

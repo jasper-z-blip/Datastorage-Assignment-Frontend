@@ -6,6 +6,7 @@ import ProjectList from './components/ProjectList';
 import ProjectEdit from './components/ProjectEdit';
 import ProjectDetails from './components/ProjectDetails';
 import CustomerPage from './components/CustomerPage';
+import EditCustomer from './components/EditCustomer';
 import NoAccessPage from './components/NoAccessPage';
 import './index.css';
 import './styles.css';
@@ -45,7 +46,7 @@ function App() {
 
     return (
         <div>
-            <h1>Mattin-Lassei Group AB</h1>
+            <h1 className='HeadLine'>Mattin-Lassei Group AB</h1>
             {location.pathname !== "/" && location.pathname !== "/no-access" && (
             <nav>
                 <Link to="/projects">Projektlista</Link> | 
@@ -62,6 +63,7 @@ function App() {
                 <Route path="/edit/:id" element={<ProjectEdit refreshProjects={fetchProjects} />} />
                 <Route path="/project/:id" element={<ProjectDetails refreshProjects={fetchProjects} />} />
                 <Route path="/customers" element={<CustomerPage customers={customers} refreshCustomers={fetchCustomers} />} />
+                <Route path="/edit-customer/:id" element={<EditCustomer />} />
             </Routes>
         </div>
     );

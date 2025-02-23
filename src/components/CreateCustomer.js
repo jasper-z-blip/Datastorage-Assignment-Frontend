@@ -60,7 +60,7 @@ const CreateCustomer = ({ refreshCustomers }) => {
                 <label>Företagsnummer:</label>
                 <input type="text" name="companyNumber" value={formData.companyNumber} onChange={handleChange} required />
 
-                <button className="SkapaKundBtn" type="submit">Skapa kund</button>
+                <button className="CreateBtn" type="submit">Skapa kund</button>
             </form>
         </div>
     );

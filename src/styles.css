@@ -23,9 +23,16 @@ input, select, button {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.HeadLine {
+  background: linear-gradient(90deg, #d400ff, #6a00f4, #390464);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
 h1 {
   text-align: center;
-
 }
 
 h2 {
@@ -114,7 +121,6 @@ nav a:hover {
   color: white;
 }
 
-
 /*Projektlista*/
 .ProjectInfo {
   margin-bottom: 1.5rem;
@@ -134,6 +140,11 @@ nav a:hover {
   cursor: pointer;
 }
 
+/*Visa projekt info*/
+.ShowProject {
+  margin-left: 2rem;
+}
+
 /*Skapa nya kunder osv.*/
 form {
   display: flex;
@@ -142,21 +153,26 @@ form {
   padding: 1rem 1rem 1rem 1rem;
 }
 
+.CustomerListContainer {
+  padding: 1rem;
+  margin-right: 1rem;
+}
+
 .CustomerList {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 8px;
   border-bottom: 1px solid #ddd;
 }
 
-.SkapaKundBtn {
+.CreateBtn {
   background-color: rgb(4, 70, 4);
   color: white;
   cursor: pointer;
 }
 
-.SkapaKundBtn:hover {
+.CreateBtn:hover {
   background: rgb(4, 81, 4);
 }
 
@@ -165,13 +181,37 @@ form {
   color: white;
   border-radius: .5rem;
   cursor: pointer;
+  height: 3.5rem;
 }
 
 .DeleteBtn:hover {
   background: darkred;
 }
 
-/*Redigera kunder*/
+.EditBtn {
+  background-color: blue;
+  color: white;
+  border-radius: .5rem;
+  cursor: pointer;
+  margin-right: 1rem;
+  height: 3.5rem;
+}
+
+.EditBtn:hover {
+  background-color: darkblue;
+}
+
+.SaveChangesBtn {
+  background-color: green;
+  color: white;
+  cursor: pointer;
+}
+
+.SaveChangesBtn:hover {
+  background-color: darkgreen;
+}
+
+/*Redigera projekt*/
 .EditProject {
   display: flex;
   flex-direction: column;

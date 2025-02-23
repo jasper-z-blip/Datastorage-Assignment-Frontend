@@ -174,7 +174,7 @@ const ProjectDetails = ({ refreshProjects }) => {
                     />
 
                     <br />
-                    <button onClick={updateProject} style={{ backgroundColor: "green", color: "white", padding: "10px", border: "none", cursor: "pointer" }}>
+                    <button onClick={updateProject} className="SaveChangesBtn">
                         Spara ändringar
                     </button>
                     <button onClick={() => setIsEditing(false)} style={{ marginLeft: "10px", padding: "10px", border: "none", cursor: "pointer" }}>
@@ -182,7 +182,7 @@ const ProjectDetails = ({ refreshProjects }) => {
                     </button>
                 </div>
             ) : (
-                <div>
+                <div className="ShowProject">
                     {customer ? (
                         <p>
                             <strong>Kund:</strong> {customer.companyName} ({customer.firstName} {customer.lastName})
@@ -198,11 +198,12 @@ const ProjectDetails = ({ refreshProjects }) => {
                     <p><strong>Tjänst:</strong> {thisProduct ? thisProduct.name : "Okänd tjänst"}</p>
                     <p><strong>Totalpris:</strong> {project.totalPrice} kr</p>
 
-                    <button onClick={() => setIsEditing(true)} style={{ backgroundColor: "blue", color: "white", padding: "10px", border: "none", cursor: "pointer" }}>
+                    <button className="EditBtn" onClick={() => setIsEditing(true)}>
                         Redigera projekt
                     </button>
-                    <button onClick={deleteProject} style={{ backgroundColor: "red", color: "white", padding: "10px", border: "none", cursor: "pointer", marginLeft: "10px" }}>
-                        Ta bort projekt
+
+                    <button className="DeleteBtn" onClick={deleteProject}>
+                        🗑️ Ta bort projekt
                     </button>
                 </div>
             )}

@@ -181,7 +181,7 @@ const CreateProject = ({ refreshProjects }) => {
 
             <p>Totalpris: {totalPrice} kr</p>
 
-            <button className="CreateProjectBtn" onClick={handleSubmit}>
+            <button className="CreateBtn" onClick={handleSubmit}>
                 Skapa projekt
             </button>
         </div>
